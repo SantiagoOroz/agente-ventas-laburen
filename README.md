@@ -3,8 +3,19 @@
 Este repositorio contiene la configuración y lógica de un Agente de Ventas Senior diseñado para Laburen.com. El agente utiliza el protocolo MCP (Model Context Protocol) para interactuar con una base de datos dinámica y gestionar ventas en tiempo real a través de WhatsApp/Chatwoot.
 
 
-## 🚀 Propósito del Proyecto
+## 🤖 Propósito del Proyecto
 El objetivo principal es demostrar una integración avanzada entre modelos de lenguaje (LLMs) y sistemas externos. Este agente no es un bot informativo; es un agente transaccional orientado al cierre de ventas y a la gestión eficiente de carritos de compra, eliminando las interfaces rígidas de menús numéricos.
+
+## 🚀 Cómo desplegar
+1. Instalar dependencias: npm install
+2. Crear base de datos D1: npx wrangler d1 create laburen-db
+3. Configurar wrangler.toml con el ID de tu base de datos.
+4. Cargar datos iniciales: npx wrangler d1 execute laburen-db --file=./schema.sql
+5. Desplegar: npm run deploy
+
+#### 🔗 Endpoints Principales
+1. GET /products: Listar productos.
+2. POST /cart: Crear carrito. (Ver documentación completa en la carpeta /docs)
 
 
 ## 🛠️ Capacidades Técnicas
@@ -13,10 +24,12 @@ El agente tiene acceso directo a funciones del servidor MCP para manipular datos
 list_products: Búsqueda inteligente de productos por nombre o descripción.
 create_cart: Inicialización de transacciones ante intención de compra detectada.
 update_cart: Modificación dinámica de cantidades y productos.
+
 ### 💬 Interfaz y CRM
 Canal Principal: WhatsApp.
 Gestión: Chatwoot (CRM de código abierto).
 Persistencia: Gestión de carritos vinculados de forma unívoca a cada conversación de usuario.
+
 ## 📋 Reglas de Negocio y Protocolo
 #### 1. Experiencia de Usuario (UX)
 Conversación Fluida: Prohibido el uso de menús tipo "Presione 1". El agente mantiene un diálogo natural y humano.
