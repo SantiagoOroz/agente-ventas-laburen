@@ -5,6 +5,7 @@ Este repositorio contiene la configuración y lógica de un Agente de Ventas Sen
 
 ## 🤖 Propósito del Proyecto
 El objetivo principal es demostrar una integración avanzada entre modelos de lenguaje (LLMs) y sistemas externos. Este agente no es un bot informativo; es un agente transaccional orientado al cierre de ventas y a la gestión eficiente de carritos de compra, eliminando las interfaces rígidas de menús numéricos.
+Forma parte del desafío técnico de Laburen.com encontrable en docs\Desafío Técnico - Laburen.com.pdf
 
 ## 🚀 Cómo desplegar
 1. Instalar dependencias: npm install
@@ -54,3 +55,66 @@ Contexto de los productos de interés del cliente.
 - Base de Datos: Catálogo dinámico vía products.xlsx.
 - Protocolo de Comunicación: Model Context Protocol (MCP).
 - Plataforma de Chat: Integración Chatwoot + WhatsApp Gateway.
+
+## Pasos
+Paso 2: Preparación de la Base de Datos
+Antes de programar el agente, necesitas que los datos estén listos en la nube.
+
+
+Descarga de Datos: Descarga el archivo products.xlsx que te provee el desafío.
+
+
+Diseño del Esquema: Crea el esquema de base de datos con al menos las tablas products (id, name, description, price, stock), carts (id, created_at, updated_at) y cart_items (id, cart_id, product_id, qty).
+
+
+Despliegue de Base de Datos: Despliega esta base de datos, preferentemente en Cloudflare (Cloudflare D1) o en otro servicio de tu elección.
+
+
+Ingesta: Importa las filas del archivo Excel a tu tabla products.
+
+Paso 3: Desarrollo del MCP (Model Context Protocol) en Cloudflare
+Este es el núcleo técnico del desafío: crear la API que usará el agente.
+
+Inicializar Proyecto: Crea un proyecto de Cloudflare Workers en tu entorno local.
+
+
+Desarrollo de Endpoints: Programa las funciones para que el MCP pueda buscar productos y mostrar detalles , además de listar productos.
+
+
+Lógica de Carrito: Implementa la función create_cart para cuando el usuario muestre intención de compra , e incluye la capacidad extra de editar el carrito (update_cart).
+
+
+Integración con Chatwoot API: Programa la lógica para agregar etiquetas en el CRM cuando se crea un carrito y cuando se deriva la conversación a un humano.
+
+Paso 4: Integración del Agente en Laburen
+Ahora conectarás tu código con el cerebro del LLM.
+
+
+Conexión del MCP: En la plataforma de Laburen, conecta la URL de tu MCP desplegado en Cloudflare.
+
+
+Selección de LLM: Prueba diferentes modelos de LLM en la plataforma para ver cuál razona mejor.
+
+
+Prompt Engineering: Configura las instrucciones del agente para que mantenga una charla continua y coherente (esto vale el 55% de la nota).
+
+
+Conexión Final: Conecta el agente directamente a la instancia de Chatwoot de Laburen para que quede desplegado en WhatsApp.
+
+Paso 5: Fase Conceptual y Documentación
+Prepara los entregables teóricos.
+
+
+Diagrama de Flujo: Crea un diagrama (de flujo o secuencia) que ilustre cómo el agente atiende a un cliente que explora productos, crea un carrito y lo edita.
+
+
+Documento Resumen: Genera un PDF o Markdown de máximo 2 páginas que incluya los endpoints utilizados y el diagrama de flujo.
+
+Paso 6: Pruebas y Entrega Final
+Recuerda que tienes 5 días para esta entrega.
+
+
+Prueba en Vivo: Asegúrate de que el agente funciona directamente por Chatwoot/WhatsApp y que consume correctamente el MCP.
+
+
+Empaquetado: Sube tu código al repositorio de GitHub y adjunta la carpeta con los diagramas y el documento conceptual.

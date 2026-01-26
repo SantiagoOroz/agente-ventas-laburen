@@ -6,10 +6,17 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "mcp-laburen",
 	"main": "src/index.ts",
-	"compatibility_date": "2025-09-27",
+	"compatibility_date": "2024-01-01",
 	"observability": {
 		"enabled": true
-	}
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "laburen-shop-db",
+			"database_id": "95e65f02-5917-4375-a9cd-8ac4a64ceac9"
+		}
+	]
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
