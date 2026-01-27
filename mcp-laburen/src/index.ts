@@ -95,13 +95,17 @@ export default {
 
 				switch (toolName) {
 					case "list_products": {
-						let sql = "SELECT * FROM products WHERE stock > 0";
+						// Seleccionamos todo. Filtramos por stock y que esté activo (columna is_active)
+						let sql = "SELECT * FROM products WHERE stock > 0 AND is_active = 1";
 						const params: any[] = [];
+
 						if (args.query) {
-							sql += " AND name LIKE ?";
-							params.push(`%${args.query}%`);
+							// AHORA BUSCAMOS EN MÚLTIPLES COLUMNAS PARA MÁS PRECISIÓN
+							sql += " AND (name LIKE ? OR type LIKE ? OR description LIKE ? OR color LIKE ?)";
+							const q = `%${args.query}%`;
+							params.push(q, q, q, q);
 						}
-						// Filtros opcionales
+
 						if (args.min_price) { sql += " AND price >= ?"; params.push(args.min_price); }
 						if (args.max_price) { sql += " AND price <= ?"; params.push(args.max_price); }
 
